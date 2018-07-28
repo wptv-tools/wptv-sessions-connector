@@ -3,7 +3,7 @@
 Plugin Name:  WordPress TV Sessions Connector
 Plugin URI:
 Description:  WordPress Plugin to connect Sessions and Video Hardware
-Version:      1.0.5
+Version:      1.0.6
 Author:       WordPress TV German Team
 Author URI:
 License:      GPL2
