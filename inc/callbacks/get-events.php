@@ -95,7 +95,6 @@ function wptvsc_get_event( WP_REST_Request $request ){
     foreach ($posts as $key => $value) {
 
         // Get the Sessions post relationship
-
         // Get the parameter for the Query
         $sessions_args = array(
             'posts_per_page'    => -1,
@@ -127,7 +126,6 @@ function wptvsc_get_event( WP_REST_Request $request ){
                 'time'                  => get_field('uhrzeit', $session->ID),
                 'sprache'               => get_field('sprache', $session->ID),
            );
-
         }
 
         $set_parameters[] = array(
