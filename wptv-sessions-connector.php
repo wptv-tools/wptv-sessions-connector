@@ -3,13 +3,15 @@
 Plugin Name:  WordPress TV Sessions Connector
 Plugin URI:
 Description:  WordPress Plugin to connect Sessions and Video Hardware
-Version:      1.0.2
+Version:      1.0.3
 Author:       WordPress TV German Team
 Author URI:
 License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  wptv-sessions
 Domain Path:  /lang
+GitHub Plugin URI: https://github.com/wptv-tools/wptv-sessions-connector.git
+GitHub Branch:     master
 */
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
