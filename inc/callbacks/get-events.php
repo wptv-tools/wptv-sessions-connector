@@ -45,6 +45,52 @@ function wptvsc_get_event_posts( WP_REST_Request $request ){
     // Filter the posts information for the json response
     $set_parameters = array();
 
+    $i = 0;
+
+    foreach ($posts as $key => $value) {
+
+
+        $set_parameters[] = array(
+                'ID'                => $value->ID,
+                'post_modified_gmt' => $value->post_modified_gmt,
+                'post_title'        => get_the_title( $value->ID ),
+                'thumbnail'         => get_the_post_thumbnail_url( $value->ID, 'full', '' ),
+                'event_date'        => '',
+                'event_year'        => '',
+                'event_city'        => get_field('stadt', $value->ID),
+                'producer_name'     => get_field('video_producer_name', $value->ID),
+                'producer_username' => get_field('video_producer_username', $value->ID)
+            );
+    }
+
+    $response = new WP_REST_Response( $set_parameters );
+    $response->header( 'X-WP-Total', (int) $total_posts );
+    $response->header( 'X-WP-TotalPages', (int) $max_pages );
+
+    return $response;
+}
+
+function wptvsc_get_event( WP_REST_Request $request ){
+
+    $post_id          = $request->get_param('id');
+    $post_type        = 'event';
+
+
+    // Get the parameter for the Query
+    $args = array(
+        'posts_per_page'    => -1,
+        'post_status'       => 'publish',
+        'post_type'         => $post_type,
+        'order_by'          => 'date',
+        'order'             => 'DESC',
+        'page'              => 'paged'
+    );
+
+    // Get Events
+    $posts = get_posts( $args );
+
+    // Filter the posts information for the json response
+    $set_parameters = array();
 
     foreach ($posts as $key => $value) {
 
@@ -81,6 +127,7 @@ function wptvsc_get_event_posts( WP_REST_Request $request ){
                 'time'                  => get_field('uhrzeit', $session->ID),
                 'sprache'               => get_field('sprache', $session->ID),
            );
+
         }
 
         $set_parameters[] = array(
@@ -95,9 +142,9 @@ function wptvsc_get_event_posts( WP_REST_Request $request ){
                 'producer_username' => get_field('video_producer_username', $value->ID),
                 'sessions'          => $sessions
             );
+
     }
+
     $response = new WP_REST_Response( $set_parameters );
-    $response->header( 'X-WP-Total', (int) $total_posts );
-    $response->header( 'X-WP-TotalPages', (int) $max_pages );
     return $response;
 }
