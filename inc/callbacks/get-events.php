@@ -45,7 +45,44 @@ function wptvsc_get_event_posts( WP_REST_Request $request ){
     // Filter the posts information for the json response
     $set_parameters = array();
 
+
     foreach ($posts as $key => $value) {
+
+        // Get the Sessions post relationship
+
+        // Get the parameter for the Query
+        $sessions_args = array(
+            'posts_per_page'    => -1,
+            'post_status'       => 'publish',
+            'post_type'         => 'session',
+            'order_by'          => 'date',
+            'order'             => 'DESC',
+            'page'              => 'paged',
+            'meta_query'    => array(
+                array(
+                    'key'       => 'event',
+                    'value'     => '"' . $value->ID . '"',
+                    'compare'   => 'LIKE',
+                )
+            )
+        );
+
+        $get_sessions = get_posts($sessions_args);
+        $sessions = array();
+
+        foreach ($get_sessions as $session) {
+           $sessions[] = array(
+                'ID'                    => $session->ID,
+                'speaker_name'          => get_field('speaker_name', $session->ID),
+                'sesion_description'    => get_field('speaker_name', $session->ID),
+                'twitterhandle'         => get_field('speaker_name', $session->ID),
+                'room'                  => get_field('raum', $session->ID),
+                'date'                  => get_field('datum', $session->ID),
+                'time'                  => get_field('uhrzeit', $session->ID),
+                'sprache'               => get_field('sprache', $session->ID),
+           );
+        }
+
         $set_parameters[] = array(
                 'ID'                => $value->ID,
                 'post_modified_gmt' => $value->post_modified_gmt,
@@ -55,7 +92,8 @@ function wptvsc_get_event_posts( WP_REST_Request $request ){
                 'event_year'        => '',
                 'event_city'        => get_field('stadt', $value->ID),
                 'producer_name'     => get_field('video_producer_name', $value->ID),
-                'producer_username' => get_field('video_producer_username', $value->ID)
+                'producer_username' => get_field('video_producer_username', $value->ID),
+                'sessions'          => $sessions
             );
     }
     $response = new WP_REST_Response( $set_parameters );
