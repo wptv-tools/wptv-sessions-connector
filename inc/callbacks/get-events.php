@@ -74,8 +74,8 @@ function wptvsc_get_event_posts( WP_REST_Request $request ){
            $sessions[] = array(
                 'ID'                    => $session->ID,
                 'speaker_name'          => get_field('speaker_name', $session->ID),
-                'sesion_description'    => get_field('speaker_name', $session->ID),
-                'twitterhandle'         => get_field('speaker_name', $session->ID),
+                'sesion_description'    => get_field('session_beschreibung', $session->ID),
+                'twitterhandle'         => get_field('twitterhandle', $session->ID),
                 'room'                  => get_field('raum', $session->ID),
                 'date'                  => get_field('datum', $session->ID),
                 'time'                  => get_field('uhrzeit', $session->ID),
