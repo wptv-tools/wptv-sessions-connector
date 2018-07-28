@@ -20,4 +20,15 @@ function wptvsc_add_event_posts_route(){
             )
         )
     ));
+
+    register_rest_route( 'wptvsc-app-routes/v2', 'get-event/(?P<id>\d+)', array(
+        'methods'  => WP_REST_Server::READABLE,
+        'callback' => 'wptvsc_get_event',
+        'show_in_index'       => false,
+        'args'                => array(
+            'id'      => array(
+                'validate_callback' => 'is_numeric'
+            )
+        )
+    ));
 }
