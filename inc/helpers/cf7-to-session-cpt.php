@@ -26,7 +26,7 @@ function wptvsc_cf7_save_to_session_cpt( $data ){
     $new_post_id = wp_insert_post($new_post);
 
     // Add Custom Field
-    add_post_meta($new_post_id, 'event', abs( $formdata['event']) );
+    add_post_meta($new_post_id, 'event', get_the_ID() );
     add_post_meta($new_post_id, 'speaker_name', sanitize_text_field( $formdata['speaker_name']) );
     add_post_meta($new_post_id, 'session_beschreibung', sanitize_textarea_field( $formdata['session_beschreibung']) );
 
