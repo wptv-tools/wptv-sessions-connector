@@ -3,7 +3,7 @@ Functionality Plugin for WP-Tools
 
 ## Version ##
 
-* 1.0.8
+* 1.0.9
 
 ## Available Endpoints ##
 
