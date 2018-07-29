@@ -9,14 +9,12 @@ Functionality Plugin for WP-Tools
 
 ### Get all event posts ###
 
-```
-#!html
+```html
 
 http://wptv.dialogo-web.de/wp-json/wptvsc-app-routes/v2/get-event-posts
 ```
 
-```
-#!txt
+```txt
 
 GET
 ```
@@ -26,8 +24,7 @@ GET
 *Successfully*
 
 
-```
-#!json
+```json
 [
     {
         "ID": 35,
@@ -45,14 +42,12 @@ GET
 
 ### Get event with sessions ###
 
-```
-#!html
+```html
 
 http://wptv.dialogo-web.de/wp-json/wptvsc-app-routes/v2/get-event/ID
 ```
 
-```
-#!txt
+```txt
 
 GET
 ```
@@ -62,8 +57,7 @@ GET
 *Successfully*
 
 
-```
-#!json
+```json
 [
     {
         "ID": 35,
