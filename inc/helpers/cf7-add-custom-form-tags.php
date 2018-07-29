@@ -5,6 +5,7 @@ add_action( 'wpcf7_init', 'wptvsc_select_room_form_tag' );
 function wptvsc_select_room_form_tag() {
     wpcf7_add_form_tag( 'room_selector', 'wptv_room_selector_form_tag_handler' );
     wpcf7_add_form_tag( 'date_selector', 'wptv_date_selector_form_tag_handler' );
+    wpcf7_add_form_tag( 'session_type', 'wptv_session_type_selector_form_tag_handler' );
 }
 
 function wptv_room_selector_form_tag_handler( $tag ) {
@@ -48,4 +49,26 @@ function wptv_date_selector_form_tag_handler( $tag ) {
     $end_date   = date('Y-m-d', strtotime( get_field('datum_veranstaltung_ende')));
 
     return '<span class="wpcf7-form-control-wrap datum"><input name="datum" value="" class="wpcf7-form-control wpcf7-date wpcf7-validates-as-required wpcf7-validates-as-date" min="'. $start_date .'" max="'. $end_date .'" aria-required="true" aria-invalid="false" type="date"></span>';
+}
+
+function wptv_session_type_selector_form_tag_handler( $tag ){
+    $html = '<span class="wpcf7-form-control-wrap type">';
+    $html .= '<select name="type" class="wpcf7-form-control wpcf7-select" aria-required="true" aria-invalid="false">';
+
+    $terms = get_terms( array(
+        'taxonomy' => 'session_type',
+        'hide_empty' => false,
+    ) );
+
+    // print_r($terms);
+    // die();
+
+    foreach ($terms as $term) {
+        $html .= '<option value="'. $term->name .'">'. $term->name .'</option>';
+    }
+
+    $html .= '</select>';
+    $html .= '</span>';
+
+    return $html;
 }
