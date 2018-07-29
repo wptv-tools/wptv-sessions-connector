@@ -27,7 +27,7 @@ function wptvsc_add_event_posts_route(){
         'show_in_index'       => false,
         'args'                => array(
             'id'      => array(
-                'validate_callback' => 'is_numeric'
+                'sanitize_callback' => 'absint'
             )
         )
     ));

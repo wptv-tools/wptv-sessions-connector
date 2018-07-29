@@ -49,14 +49,20 @@ function wptvsc_get_event_posts( WP_REST_Request $request ){
 
     foreach ($posts as $key => $value) {
 
+        // Check the date of events
+        $event_start_date = get_field('datum_veranstaltung_start', $value->ID, false);
+        $event_end_date = get_field('datum_veranstaltung_ende', $value->ID, false);
+
+        $event_year = date('Y', strtotime($event_start_date));
 
         $set_parameters[] = array(
                 'ID'                => $value->ID,
                 'post_modified_gmt' => $value->post_modified_gmt,
                 'post_title'        => get_the_title( $value->ID ),
                 'thumbnail'         => get_the_post_thumbnail_url( $value->ID, 'full', '' ),
-                'event_date'        => '',
-                'event_year'        => '',
+                'event_date_start'  => $event_start_date,
+                'event_date_end'    => $event_end_date,
+                'event_year'        => $event_year,
                 'event_city'        => get_field('stadt', $value->ID),
                 'producer_name'     => get_field('video_producer_name', $value->ID),
                 'producer_username' => get_field('video_producer_username', $value->ID)
@@ -95,7 +101,6 @@ function wptvsc_get_event( WP_REST_Request $request ){
     foreach ($posts as $key => $value) {
 
         // Get the Sessions post relationship
-
         // Get the parameter for the Query
         $sessions_args = array(
             'posts_per_page'    => -1,
@@ -127,16 +132,22 @@ function wptvsc_get_event( WP_REST_Request $request ){
                 'time'                  => get_field('uhrzeit', $session->ID),
                 'sprache'               => get_field('sprache', $session->ID),
            );
-
         }
+
+        // Check the date of events
+        $event_start_date = get_field('datum_veranstaltung_start', $value->ID, false);
+        $event_end_date = get_field('datum_veranstaltung_ende', $value->ID, false);
+
+        $event_year = date('Y', strtotime($event_start_date));
 
         $set_parameters[] = array(
                 'ID'                => $value->ID,
                 'post_modified_gmt' => $value->post_modified_gmt,
                 'post_title'        => get_the_title( $value->ID ),
                 'thumbnail'         => get_the_post_thumbnail_url( $value->ID, 'full', '' ),
-                'event_date'        => '',
-                'event_year'        => '',
+                'event_date_start'  => $event_start_date,
+                'event_date_end'    => $event_end_date,
+                'event_year'        => $event_year,
                 'event_city'        => get_field('stadt', $value->ID),
                 'producer_name'     => get_field('video_producer_name', $value->ID),
                 'producer_username' => get_field('video_producer_username', $value->ID),

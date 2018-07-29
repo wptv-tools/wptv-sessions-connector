@@ -3,7 +3,7 @@ Functionality Plugin for WP-Tools
 
 ## Version ##
 
-* 1.0.6
+* 1.0.8
 
 ## Available Endpoints ##
 
@@ -28,11 +28,12 @@ GET
 [
     {
         "ID": 35,
-        "post_modified_gmt": "2018-07-28 11:47:38",
+        "post_modified_gmt": "2018-07-28 13:42:58",
         "post_title": "WordCamp Würzburg 2018",
         "thumbnail": false,
-        "event_date": "",
-        "event_year": "",
+        "event_date_start": "20180922",
+        "event_date_end": "20180922",
+        "event_year": "2018",
         "event_city": "Würzburg",
         "producer_name": "Frank Neumann-Staude",
         "producer_username": "f.staude"
@@ -61,11 +62,12 @@ GET
 [
     {
         "ID": 35,
-        "post_modified_gmt": "2018-07-28 11:47:38",
+        "post_modified_gmt": "2018-07-28 13:42:58",
         "post_title": "WordCamp Würzburg 2018",
         "thumbnail": false,
-        "event_date": "",
-        "event_year": "",
+        "event_date_start": "20180922",
+        "event_date_end": "20180922",
+        "event_year": "2018",
         "event_city": "Würzburg",
         "producer_name": "Frank Neumann-Staude",
         "producer_username": "f.staude",
@@ -82,5 +84,4 @@ GET
             }
         ]
     }
-]
 ```
